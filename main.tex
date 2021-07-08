@@ -1,0 +1,749 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+
+
+% packages
+\usepackage[svgnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{multirow} % http://ctan.org/pkg/multirow
+\usepackage{hhline} % http://ctan.org/pkg/hhline
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage[margin=0.5in]{geometry}
+
+\DeclareMathOperator{\image}{im}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+\newcommand{\fallingfactorial}[1]{%
+  ^{\underline{#1}}%
+}
+\newcommand{\risingfactorial}[1]{%
+  ^{\overline{#1}}%
+}
+
+% commands
+
+% opening
+\begin{document}
+\hspace*{\fill}
+% title page
+\begin{titlepage}
+	%\begin{center}
+	\centering
+	\vspace*{100pt}
+		% {\Huge \textsc{Graph Theory and Combinatorics}}\\[0.5\baselineskip]
+		{\Large Graph Theory and Combinatorics}\\[0.5\baselineskip]
+		{\Large \emph{Harris, Hirst, Mossinghoff}}\\[0.5\baselineskip]
+	\vspace{0.03\textheight}
+	\rule{0.3\textwidth}{0.4pt}\\[0.5\baselineskip]
+	\vspace{0.05\textheight}	
+		{\Huge Exercises}\\[0.5\baselineskip]
+		%{\Large 2018/02/23 10:00}\\[0.5\baselineskip]
+	\vspace{0.03\textheight}
+	\rule{0.3\textwidth}{0.4pt}\\[0.5\baselineskip]
+	\vspace{0.05\textheight}
+		{\Large \emph{Dan Yunheum Seol}}\\[0.7\baselineskip]
+		%{\huge 260677676}\\[0.5\baselineskip]
+	%\maketitle
+	\begin{minipage}{6.7cm}
+	\centering
+	\end{minipage}
+	%\end{center}
+\end{titlepage}
+
+% content
+\newpage
+\section{2.1 Combinatorics}
+\subsection{Question 1}
+\smallskip
+\emph{In the C++ programming language, a variable name must start with a letter or the underscore character \_, and succeeding characters must be letters, digits, or the underscore characters. Uppercase and lowercase letters are considered to be different.}
+\bigskip
+\\
+(a) How many variable names with exactly five characters can be formed in C++?
+\medskip
+\\
+Because the first character is always fixed, the number of different cases gets determined from the remaining four characters. For $i$th character where $i=2,3,4,5$, we have $26+26+10+1 = 69$ choices.
+\smallskip
+\\
+So there would be $69^{(5-1)}$ cases.
+\bigskip
+\\
+(b) How many are there with at most five characters?
+\medskip
+\\
+$\sum_{i=0}^4 69^i$
+\bigskip
+\\
+(c) How many are there with at most five, being a palindrome?
+\medskip
+\begin{itemize}
+    \item palindrome with $1$ character - $1$ case \_
+    \item palindrome with $2$ characters - $1$ case \_\_
+    \item palindrome with $3$ characters - $69$ cases of form  \_x\_
+    \item palindrome with $4$ characters - $69^2$ cases of form \_xy\_
+    \item palindrome with $5$ characters - $69^3$ cases of form \_xyz\_
+\end{itemize}
+So we would have $2 + \sum_{i=1}^3 69$ cases.
+\smallskip
+\\
+\subsection{Question 2}
+\smallskip
+\emph{Assume that a vowel is one of the five letters \textbf{A}, \textbf{E}, \textbf{I}, \textbf{O}, \textbf{U}}
+\bigskip
+\\
+(a) How many eleven-letter sequences from the alphabet contains exactly three vowels?
+\medskip
+\\
+$21^8 * 5^3 * {11 \choose 3} $
+\bigskip
+\\
+(b) How many of these have at least one letter used twice or more.
+\medskip
+\\
+Let us subtract all the cases where every letter is distinct from (a).
+\smallskip
+\\
+The number of cases where every letter is distinct is ${21\choose8} * {5\choose3}$. Now, since the order matters, we must multiply this by $11!$. So we have ${21\choose8} * {5\choose3} * 11!$
+
+\newpage
+\subsection{Question 3}
+\emph{There are 30 teams in NBA: $15$ in the Western Conference, and 15 in the Eastern Conference.}
+\bigskip
+\\
+(a) Suppose each of the teams in the league has one pick in the first round of the NBA draft. How many ways are there to arrange the order of the teams selecting in the draft?
+\medskip
+\\
+30! ways.
+\bigskip
+\\
+(b) Suppose that each of the first three positions in the draft must be awarded to one of the fourteen teams that did not advance in the play offs. How many ways to assign the 3 positions in the draft
+\medskip
+\\
+$P(14, 3)$ ways. as the first position could go to 14 teams, second to 13 teams, and the third to 12.
+\bigskip
+\\
+(c) How many ways are there for eight teams from each conference to advance to the playoffs, if the order is not important?
+\medskip
+\\
+${15\choose8}^2$ ways, ${15\choose8}$ being way to choose 8 teams from one conference.
+\bigskip
+\\
+(d) Suppose that every team has 3 centers, four guards, and five forwards. How many ways are there to select an all-start team with the same composition from the Western conference?
+\medskip
+\\
+There are $15$ teams on the Western conference, so there are $P(15*3, 3)$ ways to choose centers, $P(4*15, 4)$ ways to choose guards, and $P(5*15, 5)$ ways to choose forwards. The total number would be
+\smallskip
+\\ 
+$\prod_{i=3}^5 P(15*i, i)$ ways.
+\smallskip
+\\
+\subsection{Question 4}
+\emph{According to IFAB rules, a full soccer team consists of 11 players, with one of them being a goalkeeper. The remaining 10 are one of: defenders, midfielders and strikers. There is no restriction of players at each of these positions.}
+\bigskip
+\\
+(a) How many different configurations are there for a full football team?
+\medskip
+\\
+We can use stars-and-bars bijection to answer this question. Excluding the goalkeeper, there are 10 players that can be included in one of the three categories. We will think of this as dividing 10 stars into three using two bars. There are 9 slots to put the bars between the stars, and one before the first (this would be equivalent to having no defenders) star and after the last star (this would be equivalent to having no strikers. We can also put the two bars in the same place (this would be the case where we have no midfielders).
+ The number of configurations would be equal to 
+$$\multiset{11}{2} = {12\choose2} = 11*12/2 = 66$$
+So 66 cases.
+\\
+\bigskip
+\\
+(b) Repeat the previous problem if there must be at least two players at each outfield position.
+\medskip
+\\Since two people must be in each category, there are only six players left to allocate to one of the categories, this becomes the similar problem with 4 stars, or the problem with 7 stars where we have 6 places to place the bar, and in each slot you can place at most one bar. Either case, 
+$$\multiset{5}{2} = {6\choose 2} =  15$$ 
+cases.
+\\
+\bigskip
+(c) How many ways can a coach assign eleven different players with ?
+The 10 non-goalkeepers have 3 choices for their position: thus we have $3^{10}$ ways, given that a goalkeeper is chosen.
+
+Now there are 11 ways to choose a goalkeeper. So it would be $11*3^{10}$.
+\newpage
+\subsection{Question 5}
+\emph{A political science quiz has two parts. The first section makes you present my opinion of the 4 most influential secretaries-general in the history of the UN in a ranked list. In the second, your must name 10 members of UNSC in any order, including 2 permanent ones. If there are 8 secretaries-general in the history of UN, and 10 non-permanent and 5 permanent members in UNSC, how many ways are there to succeed the exam?}
+\medskip
+$$P(8, 4) * {5\choose2} * {13 \choose 8}$$
+\bigskip
+\subsection{Question 6}
+\emph{A midterm exam in phenomenology has two parts: 1. 10 multiple choice question with 4 choices. Each question can have one, multiple, or no answers. 2. a 8 true/false questions or to select the proper definition of each of 7 terms from a list of 10 possible $definitions^{*}$. Every question must be answered on whichever part is chosen, but one is not allowed to complete both portions. How many ways are there to complete the exam?}
+\medskip
+\\
+The second section with definitions has a vague description. Here will understand there are 7 terms listed, and choosing the definitions from a separate list. (The answer for this portion will change to ${10\choose 7}$ if that were the case).
+\\
+\medskip
+There are 40 options total for the first section, and we can choose to include it or not in our response. So, there would be $2^{40}$ possible ways. The second section, there are $2^8$ cases for the true/false portion, and $P(10, 7)$ ways to complete the other.
+\\
+\medskip
+Using product and sum rule, we would have
+$$2^{40} * (2^8 + P(10, 7))$$ 
+ways to complete the exam.
+\\
+\bigskip
+\subsection{Question 7}
+\emph{A ballot lists 10 candidates for city council, 8 candidates for the school board, and 5 bond issues. The ballot instructs voters to choose up to 4 people running for city council, rank up to 3 candidates and approve/reject each bond issue. How many different ballots may be cast if partially completed ballots are allowed?}
+\\
+\medskip
+It would be
+$$\sum_{i=0}^4 {10 \choose i} * \sum_{j=0}^3 P(8, j) * \sum_{k=0}^5 2^k$$
+\newpage
+\subsection{Question 8}
+\emph{Compute the number of ways to deal each of the following five-card hand in poker}
+\\
+\medskip
+(a) Straight: the values of the cards form a sequence of consecutive integers. A can be either 1 or 14, but not both in the same hand.
+\\
+\medskip
+There are 10 starting points from A to 10. Each can come from one of 4 suits.
+$10*4^5 - 40$
+\\
+\medskip
+(b) Flush: All five cards belong to a same suit. We exclude cases for straight and a flush.
+\\
+\medskip
+There are 4 suits to choose. We can choose 5 out of 13 cards in one suit.
+${4\choose1}*{13\choose5} - 40$
+\\
+\medskip
+(c) Straight flush: Both a straight and a flush.
+\\
+\medskip
+There are 10 starting points from A to 10 and 4 suits. There are 40 of them.
+\\
+\medskip
+(d) Four of a kind.
+\\
+\medskip
+There are 13 kinds in a suit, the 5th one can be anything from the rest.
+$13*48$
+\\
+\medskip
+(e) Two distinct pairs excluding a full house.
+\\
+\medskip
+We choose 2 kinds - the 5th one must be chosen avoiding those two kinds.
+${13\choose2}* 44$
+\\
+\medskip
+(f) Exactly one pair (no three of a kind)
+We choose 1 kind - the remaining 3 ones must be chosen avoiding that
+${13\choose1}*{12\choose3}*4^3$
+\\
+\medskip
+(g) At least one card from each suit.
+\\
+\medskip
+$13^4*48$
+\\
+\medskip
+(h) At least one card from each suit with no two values matching.
+${13\choose5}*4!*4$
+\\
+\medskip
+(i) Three cards of one suit, and the other two of another suit, like three hearts and two spades.
+\\
+\medskip
+$4*P(13, 3)*3*P(13, 2)$
+\\
+\bigskip
+\subsection{Question 9}
+\emph{In the lottery game Texas Two Step, a player selects 4 different numbers between 1 and 35 in step 1, then selects an additional "bonus ball" number in the same range in step 2. The latter number is not considered to be a part of the set selected in part 1, and it can match one from the set.}
+\\
+\medskip
+(a) A resident of College Station always selects a bonus ball number that is different from any of the numbers he picks in step 1. How many possible ways are there?
+\\
+\medskip
+${35\choose4}*{35\choose1}$
+\\
+\medskip
+(b)In Rhode Island's lottery, a gambler picks a set of five numbers between 1 and 35. Is the number of cases different from the answer from (a)? What is the ratio?
+\\
+\medskip
+They are different. ${35\choose5} \neq {35\choose4}*{35\choose1}$
+\\
+\medskip
+$$
+\frac{{35\choose5}}{{35\choose4}*{35\choose1}} = \frac{35!}{5!30!} * \frac{31! 4!}{35!35} = \frac{31!}{5*35*30!} = \frac{31}{5*35} 
+$$
+\newpage
+\subsection{Question 10}
+\medskip
+(a) A superstitious resident always picks 3 even numbers and 3 odd numbers when playing Lotto Texas. what fraction all possible lottery tickets have this property?
+\\
+\medskip
+We divide cases by the parity of the bonus ball number. There are 18 odd numbers and 17 even numbers.
+\begin{itemize}
+    \item if even --  $17*{17 \choose 1} * {18 \choose 3}$ (1)
+    \item if odd -- $18*{17 \choose 2} * {18 \choose 2}$ (2)
+\end{itemize}
+It would be $\frac{(1)+(2)}{{35\choose4}*35}$
+\\
+\bigskip
+(b) Suppose in a more general lottery game one selects 6 numbers between $1...2n$. What fraction of all lottery tickets have the property that half the numbers are odd and half are even?
+\\
+\medskip
+There are $n$ even and odd numbers each respectively, so the proportion would be:
+$\frac{{n\choose3}^2}{{2n\choose6}}$
+\\
+\bigskip
+(c) What is the asymptotic value of the fraction in (b)?
+\\
+\medskip
+$$
+\frac{{n\choose3}^2}{{2n\choose6}} = \frac{(2n-6)! 6! }{(2n)!} * \frac{(n!)^2}{((n-3)!)^2 (3!)^2} = \frac{20* n^2 * (n-1)^2 * (n-2)^2}{(2n)(2n-1)(2n-2)(2n-3)(2n-4)(2n-5)} = \frac{20}{2^6}
+$$
+
+\subsection{Question 11}
+\emph{11. Suppose a positive integer $N$ has prime factorization $\prod_{i=1}^{m} p_{i}^{n_i}$.  How many divisors can be there for $N$?}
+\\
+\medskip
+For each power of prime factor $p_{i}^{n_i}$, there are $n_i$ of how many of that factor to include. So it would be $\prod_{i=1}^m (n_i)$ divisors.
+\\
+\subsection{Question 12}
+\emph{12. Assume a positive integer cannot have 0 as its leading digit.}
+\\
+\bigskip
+(a) How many five digits positive integers have no repeated digits at all?
+\\
+\medskip
+We have 9 digits to choose as the first one (no 0). We have 9 choices for the second digit (0-9 excluding the first) 8 for 3rd, etc. So it would be $9* P(9, 4)$
+\\
+\bigskip
+(b) How many have no consecutive repeated digits ? 
+\\
+\medskip
+Here we understood it as it allows non-consecutive digits. There are 9 choices for the first digit and 9 for the second. The third would also have 9 choices as we need to exclude the number chosen for immediately preceding digit. Same for the 4th, etc.
+So it would be $9^5$.
+\\
+\bigskip
+(c) How many have at least one run of consecutive repeated digits?
+\\
+\medskip
+We subtract all possible cases of positive integers and subtract the answer from (b)
+$9*10^{4} - 9^{5}$ cases.
+\\
+\bigskip
+\subsection{Question 13}
+\emph{How many positive integers are there whose representation in base 8 has exactly 8 octal digits, at most one of which is odd? Assume it cannot start with 0.}
+\\
+\medskip
+There are two cases:
+\begin{itemize}
+    \item The first digit is odd - there are 4 cases (1,3,5,7) to choose for the first digit, and the choices for the remaining 7 would be 4 (0,2,4,6). So it would be $4^8$.
+    \item The first digit is even - there are 3 choices for the first, and there are 7 slots to choose whether odd digit is "possible", and for the remaining 6 digits there are 4 choices. There would be $3*{7\choose1}*8*4^{6}$
+\end{itemize}
+\newpage
+\section{Question 14}
+\emph{Let $\Delta$ be the difference operator $\Delta(f(x)) = f(x+1) - f(x)$. Show that}
+$$
+\Delta(x\fallingfactorial{n}) = nx\fallingfactorial{n-1}
+$$
+\medskip
+$$
+\Delta(x\fallingfactorial{n}) = (x+1)\fallingfactorial{n} - x\fallingfactorial{n} = (x+1) * .. * (x-n+2) - x*(x-1) * ... *(x-n+1) =
+$$
+$$
+\prod_{i=0}^{n-2}(x-i) \{(x+1) - (x-n+1)\} = n\prod_{i=0}^{n-2}(x-i) = n x\fallingfactorial{n-1}
+$$
+\medskip
+\emph{Use the conclusion from above to prove}
+$$
+\sum_{k=0}^{m-1}k\fallingfactorial{n} = \frac{m\fallingfactorial{n+1}}{n+1}
+$$
+\medskip
+We use induction on $n$.
+For $n=1$
+$$
+\sum_{k=0}^{m-1} k = \frac{m(m-1)}{2} = \frac{x\fallingfactorial{2}}{1+1}
+$$
+Suppose true for some $n$. Remark that
+$$
+(n+2) \sum_{k=0}^{m-1} k \fallingfactorial{n+1} = \sum_{k=0}^{m-1} \Delta(k\fallingfactorial{n+2}) = \sum_{k=0}^{m-1} ((k+1)\fallingfactorial{n+2} - k\fallingfactorial{n+2}) = 
+$$
+$$
+m\fallingfactorial{n+2} - (m-1)\fallingfactorial{n+2} + (m-1)\fallingfactorial{n+2} .. - 1\fallingfactorial{n+2} + 1\fallingfactorial{n+2} - 0\fallingfactorial{n+2} = m\fallingfactorial{n+2}
+$$
+$\implies \sum_{k=0}^{m-1} k \fallingfactorial{n+1} = \frac{m\fallingfactorial{n+2}}{n+2} \square$
+\newpage
+\section{2.1 Combinatorics}
+\subsection{Question 1}
+\smallskip
+\emph{Use a combinatorial argument to prove that there are exactly $2^n$ different subsets of a set (Do not use the binomial theorem)}
+\bigskip
+\\
+Take an enumeration of the set $S = {s_1, ..., s_n }$: 
+\\
+Now think of a function $f:\mathbf{P}(S) -> {0, 1}^n$ where
+$$
+f(A)_i = 1 \iff s_i \in A \text{  else  } 0
+$$
+\smallskip
+\\
+which is the characteristic function of A. Given the enumeration, Every subset of S can be recovered from the resulting binary sequence uniquely and vice versa. $f$ is a bijection. Since there are $2^n$ such binary sequences, therefore there are $2^n$ subsets of $S$.
+\bigskip
+\\
+\subsection{Question 2}
+\smallskip
+\emph{Prove the absorption/extraction identity: $0\leq k \leq n \in \mathbb{N}^+$)}
+\bigskip
+\\
+$$
+{n\choose k} = \frac{n}{k} {n-1\choose k-1}
+$$
+Solution:
+$$
+{n\choose k} = \frac{n!}{(n-k)! (k!)} = \frac{n(n-1)!}{(n-k)! k(k-1)!} = \frac{n}{k}\frac{(n-1)!}{((n-1)-(k-1))! (k-1)!} = \frac{n}{k} {n-1\choose k-1}
+$$
+\subsection{Question 3}
+\smallskip
+\emph{Use algebraic methods to prove the cancellation identity: if $0 \leq m \leq k \leq n \in \mathbb{N}$}
+\bigskip
+\\
+$$
+{n\choose k} {k\choose m} = {n\choose m} {n-m \choose k-m}
+$$
+\bigskip
+\\
+$$
+{n\choose k} {k\choose m} = \frac{n!}{(n-k)! (k!)} \frac{k!}{(k-m)! (m!)} = 
+\frac{n!}{(n-k)!} \frac{1}{(k-m)! (m!)} = \frac{n!}{(n-k)! (n-m)!} \frac{(n-m)!}{(k-m)! (m!)} 
+$$
+$$= \frac{n!}{(m!) (n-m)!} \frac{(n-m)!}{(k-m)! (n-k)!}
+= {n\choose m} {n-m \choose k-m}
+$$
+\subsection{Question 4}
+\smallskip
+\emph{Suppose that a museum curator with a collection of $n$ paintings by Jackson Pollack needs to select $k$ of them for display, and needs to pick $m$ of these to put in a particularly prominent part of the display. Show how to count the number of possible combinations in two ways so that the cancellation identity appears.}
+\bigskip
+\\
+Solution:
+The provided statement represents the LHS of the cancellation identity. Now this is equivalent to choosing $m$ out of $n$ paintings to put in a particularly prominent part of display, and then choosing $k-m$ remaining paintings to choose to include in the remaining parts of the display.
+\bigskip
+\\
+\subsection{Question 5}
+\smallskip
+\emph{Prove the parallel summation identity: $m, n \in \mathbb{N}^0$)}
+\bigskip
+\\
+$$
+\sum_{k=0}^n{m + k\choose k} = {m + n + 1\choose n}
+$$
+Solution:
+Using the summing on the upper index property and symmetry, where $k=m...m+n$ we obtain the result.
+$$
+\sum_{k=0}^n{m + k\choose m} = {m + n + 1\choose m+1}
+$$
+Alternatively, take an enumeration of set with $m+n+1$ items: the number of such cases on RHS can also be decomposed as:
+${m + n\choose m}$ as the number of all cases of choosing $m + 1$ elements where we include the first element.
+${m + (n-1)\choose m}$ as the number of all cases where first element is excluded and the second element is included etc.
+In general, ${m + n + 1 - j\choose m}$ will count all the cases where we exclude $1, 2, ..., j-1$-th items and include item $j$ for $j = 1, ... (n+1)$
+\bigskip
+\\
+\subsection{Question 6}
+\smallskip
+\emph{Prove the hexagonal identity:}
+\bigskip
+\\
+$$
+{n-1\choose k-1}{n\choose k+1}{n+1\choose k} = {n-1\choose k}{n\choose k-1}{n+1\choose k+1}
+$$
+Solution:
+$$
+{n-1\choose k-1}{n\choose k+1}{n+1\choose k} = \frac{(n-1)!}{(n-k)!(k-1)!}\frac{n!}{(n-k-1)!(k+1)!}\frac{(n+1)!}{(n-k+1)!k!}   
+$$
+$$
+= \frac{(n-1)!}{k!(n-k-1)}\frac{n!}{(n-k+1)!(k-1)!}\frac{(n+1)!}{(n-k-1)!(k+1)!}
+= {n-1\choose k}{n\choose k-1}{n+1\choose k+1}
+$$
+\subsection{Question 7}
+\smallskip
+\emph{Compute the value of the following sums.}
+\\
+(a) $\sum_{k} {80 \choose k} {(k+1) \choose 31}$
+\medskip
+$$
+\sum_{k} {80 \choose k} {(k+1) \choose 31} = \sum_{k} \frac{80!}{(80-k)!k!} \frac{(k+1)!}{(k-30)!31!} = \sum_{k}  \frac{k+1}{31} \frac{80!}{(80-k)!} \frac{1}{(k-30)!30!} = \sum_{k}  \frac{k+1}{31} \frac{80!}{(80-k)!} \frac{1}{(k-30)!30!}\frac{50!}{50!} =
+$$
+$$
+\sum_{k}  \frac{k+1}{31} \frac{80!}{30!50!} \frac{50!}{(k-30)!(80-k)!} =
+\sum_{k}  \frac{k+1}{31} {80 \choose 30} \frac{50!}{(k-30)!(80-k)!} = \sum_{k=30}^{80}  \frac{k+1}{31} {80 \choose 30} \frac{50!}{(k-30)!(80-k)!}
+$$
+now re-index this with $t=k-30$.
+$$
+= \frac{1}{31}{80 \choose 30}\sum_{t=0}^{50} (t+31) \frac{50!}{t!(50-t)!}
+= \frac{1}{31}{80 \choose 30}\sum_{t=0}^{50} (t+31) {50 \choose t}
+= \frac{1}{31}{80 \choose 30} (31*2^{50}+ \sum_{t=0}^{50} t {50 \choose t}) 
+=
+$$
+$$
+\frac{1}{31}{80 \choose 30} (31*2^{50} + \sum_{t=0}^{50} t \frac{50!}{t!(50-t)!}) 
+=
+\frac{1}{31}{80 \choose 30} (31*2^{50} + \sum_{t=1}^{50}\frac{50!}{(t-1)!(50-t)!})
+=
+\frac{1}{31}{80 \choose 30} (31*2^{50} + \sum_{m=0}^{49}50*\frac{49!}{(m)!(49-m)!})
+$$
+
+$$
+=
+\frac{1}{31}{80 \choose 30} (31*2^{50} + 50\sum_{m=0}^{49}\frac{49!}{(m)!(49-m)!})
+=
+\frac{1}{31}{80 \choose 30} (31*2^{50} + 50\sum_{m=0}^{49}{49 \choose m})
+=
+\frac{1}{31}{80 \choose 30} (31*2^{50} + 50*2^{49})
+=
+\frac{1}{31}{80 \choose 30} (112*2^{49})
+$$
+\newpage
+(b) $\sum_{k \geq 0} \frac{1}{k+1}{99 \choose k} {200 \choose 120-k}$
+$$
+\sum_{k \geq 0} \frac{1}{k+1}{99 \choose k} {200 \choose 120-k}
+=
+\sum_{k \geq 0} \frac{1}{k+1}\frac{99!}{k!(99-k)!}{200 \choose 120-k}
+$$
+
+If you remark $100-(k+1) = 99-k$, and multiply $100/100$,
+$$
+=
+\frac{1}{100}\sum_{k \geq 0} {100 \choose k+1}{200 \choose 120-k}
+$$
+re-index with $t = k+1$
+$$
+=
+\frac{1}{100}\{(\sum_{t \geq 0} {100 \choose t}{200 \choose 121-t}) -  {200 \choose 121}\}
+=
+\frac{1}{100}\{{300 \choose 121} -  {200 \choose 121}\}
+$$
+\medskip
+(c) $\sum_{k = 100}^{201} \sum_{j = 0}^{100} {201 \choose k+1} {j \choose 100}$
+$$
+\sum_{k = 100}^{201} \sum_{j = 0}^{100} {201 \choose k+1} {j \choose 100}
+$$
+\medskip
+(d) $\sum_{k} {n \choose k}^2 $
+
+$$
+\sum_{k} {n \choose k}^2 
+= 
+\sum_{k} {n \choose k}{n \choose k} 
+=
+\sum_{k} {n \choose k}{n \choose n-k}
+=
+{2n \choose n}
+$$
+\medskip
+(e) $\sum_{k \leq m} (-1)^k {n \choose k}$
+\\
+Claim: $\sum_{k \leq m} (-1)^k {n \choose k} = (-1)^m {n-1 \choose m}$
+\\
+We prove it by induction.
+\\
+\medskip
+Base case: $m=0$
+$$
+\sum_{k \leq 0} (-1)^k {n \choose k} = 1 = (-1)^0 {n \choose 0}
+$$
+Inductive case: suppose it holds for some $m$.
+For $m+1$
+$$
+\sum_{k \leq m + 1} (-1)^k {n \choose k} 
+= 
+(-1)^{m+1} {n \choose m+1}  \sum_{k \leq m} (-1)^k {n \choose k}  
+=  
+(-1)^{m+1} {n \choose m+1} + (-1)^m {n-1 \choose m}
+= 
+(-1)^m \{ - {n \choose m+1} +  {n-1 \choose m}\}
+$$
+$$
+=
+(-1)^m \{ - ({n-1 \choose m+1} + {n-1 \choose m}) +  {n-1 \choose m}\}
+=
+(-1)^m \{-{n-1 \choose m+1}\}
+=
+(-1)^{m+1} {n-1 \choose m+1}
+$$
+\medskip
+Thus our claim is proved,
+\newpage
+\subsection{Question 8}
+\smallskip
+\emph{Prove the binomial theorem for:}
+\\
+\medskip
+(a) falling factorial powers. 
+$$
+(x+y)\fallingfactorial{n} = \sum_{k} {n \choose k} x\fallingfactorial{k}y\fallingfactorial{n-k}
+$$
+\medskip
+We prove by induction. 
+\\
+Base case: $n = 0$ both hand sides are 1.
+\medskip
+\\
+Inductive case: suppose it holds for some $n$. Then
+$$
+(x+y)\fallingfactorial{n+1} 
+= 
+(x+y-n)\sum_{k} {n \choose k} x\fallingfactorial{k}y\fallingfactorial{n-k}
+=
+\{(x-k) + (y-(n-k))\}\sum_{k} {n \choose k} x\fallingfactorial{k}y\fallingfactorial{n-k}
+=\sum_{k_1} {n \choose k_1 } x\fallingfactorial{k_1 + 1}y\fallingfactorial{n-k_1} 
++
+\sum_{k_2} {n \choose k_2 } x\fallingfactorial{k_2}y\fallingfactorial{n-k_2 + 1}
+$$
+Now, summing for matching indices $k_1 + 1 = k_2 \implies k_1 = k_2 - 1$ when
+$$
+=
+\sum_{k} \{{n \choose k-1 } + {n \choose k}\} +  x\fallingfactorial{k}y\fallingfactorial{n+1-k}
+=
+\sum_{k} {n+1 \choose k} x\fallingfactorial{k}y\fallingfactorial{n+1-k}
+$$
+\bigskip
+(b) rising factorial powers
+$$
+(x+y)\risingfactorial{n} = \sum_{k} {n \choose k} x\risingfactorial{k}y\risingfactorial{n-k}
+$$
+\medskip
+We prove by induction. 
+\\
+Base case: $n = 0$ both hand sides are 1.
+\medskip
+\\
+Inductive case: suppose it holds for some $n$. Then
+$$
+(x+y)\risingfactorial{n + 1} 
+=
+(x+y+n)(x+y)\risingfactorial{n}
+=
+(x+y+n)\sum_{k} {n \choose k} x\risingfactorial{k}y\risingfactorial{n-k}
+$$
+$$
+=
+\{(x+k) + (y+(n-k))\}\sum_{k} {n \choose k} x\risingfactorial{k}y\risingfactorial{n-k}
+=\sum_{k_1} {n \choose k_1 } x\risingfactoriall{k_1 + 1}y\risingfactorial{n+k_1} 
++
+\sum_{k_2} {n \choose k_2 } x\risingfactorial{k_2}y\risingfactorial{n+k_2 + 1}
+$$
+Now, summing for matching indices $k_1 + 1 = k_2 \implies k_1 = k_2 - 1$ when
+$$
+=
+\sum_{k} \{{n \choose k-1 } + {n \choose k}\} +  x\risingfactorial{k}y\risingfactorial{n-k}
+=
+\sum_{k} {n+1 \choose k} x\risingfactorial{k}y\risingfactorial{n+1-k}
+$$
+\newpage
+\subsection{Question 9}
+\smallskip
+\emph{Let $n \in \mathbb{N}^0$. Suppose $f, g \in C^n(\mathbb{R})$. Let $f^{(k)} $ be the $k$-th derivative of $f$. Let $h(x) = f(x)g(x)$. Show that}
+$$
+h^{(n)}(x) = \sum_{k} {n\choose k} f^{(k)}(x) g^{(n-k)}(x)
+$$
+\medskip
+Solution. We prove by induction.
+\\
+Base case for $n=0$. $h(x) = f(x)g(x)$. Done.
+\\
+\medskip
+\\
+Inductive case: suppose it works for some $n$. For $n+1$,
+$$
+h^{(n+1)}(x) 
+= 
+\frac{d}{dx} h^{(n)}(x) 
+= 
+\frac{d}{dx} \sum_{k} {n\choose k} f^{(k)}(x) g^{(n-k)}(x)
+=
+ \sum_{k_1} {n\choose k_1} f^{(k_1+1)}(x) g^{(n-k_1)}(x) + \sum_{k_2} {n\choose k_2} f^{(k_2)}(x) g^{(n-k_2+1)}(x)
+$$
+$$
+=
+\sum_{k} \{{n\choose k-1} + {n\choose k}\} f^{(k)}(x) g^{(n-k+1)}(x)
+=
+\sum_{k} {n+1\choose k} f^{(k)}(x) g^{(n+1-k)}(x)
+$$
+\bigskip
+\subsection{Question 10}
+\smallskip
+\emph{In the Virginia lottery game Win For Life, an entry consists of a selection of six different numbers between 1 and 42, and each drawing selects seven different numbers in this range. How many different entries can match at least three of the drawn numbers?}
+\medskip
+\\
+Given a fixed set of drawn numbers, the number would be
+$$
+\sum_{k=3}^6 {7 \choose k} * {35 \choose 6-k}
+$$
+\bigskip
+\subsection{Question 11}
+\smallskip
+\emph{The state of Florida administers several lottery games. In Florida Lotto, a player picks a set of 6 numbers between 1 and 53. In Fantasy 5, a gambler chooses a set of 5 numbers between 1 and 36. In which game is a player more likely to match at least two numbers against the ones drawn?}
+\medskip
+\\
+$$
+\frac{\sum_{k=2}^6 {47\choose 6-k}}{{6\choose k}}
+$$
+and
+$$
+\frac{\sum_{k=2}^5 {31\choose 5-k} {5\choose k}}{{36\choose5}}
+$$
+\newpage
+\section{2.3 Multinomial Coefficients}
+\subsection{Question 1}
+\smallskip
+\emph{Prove the addition identity for multinomial coeffcients by using the expansion identity}
+\medskip
+We prove this by induction.
+\\
+Base case : $n = 1$, $\sum_{i} k_i = n$, say $k_i = 1$
+$$
+{1\choose k_1, ..., k_m} = {0 \choose \vec{0}} + \sum_{j \neq i}{0 \choose -e_i}
+= 1 + 0 = 1
+$$
+\medskip
+\\
+Inductive case: Say it works for some $n$ and $\sum_{i}k_i = n$ then for $n+1$ with $\sum_{i}k_i = n+1$ 
+$$
+{n+1\choose k_1, ..., k_m} 
+= 
+\frac{(n+1)!}{\prod_{j} (k_j)!} 
+= 
+\frac{(n+1)(n!)}{\prod_{j} (k_i)!} 
+= 
+\frac{\sum_{i}k_i(n!)}{\prod_{j} (k_j)!}
+=
+\sum_{i} k_i \frac{(n!)}{\prod_{j} (k_j)!}
+$$
+$$
+=
+\sum_{i} \frac{(n!)}{(k_i-1)\prod_{j \neq i} (k_j)!}
+=
+\sum_{i} {n\choose k_1, ... k_{i-1}, k_{i}-1, k_{i+1}, ..., k_m} 
+$$
+\bigskip
+\\
+\subsection{Question 2}
+\smallskip
+\emph{For nonnegative integers $a, b, c$, let $P(a,b,c)$ denote the number of paths in 3D space that begin at the origin, end at $(a,b,c)$ and consist entirely of steps of unit length, each of which is parallel to a coordinate axis. Prove that $P(a,b,c) = {a+b+c \choose a, b, c}$}
+\medskip
+\\
+This is equivalent to the number of ways to arrange the 3 types of bins with $a$ balls in bin A, $b$ balls in bin B, and $C$ balls in bin C. The number of such ordering can be counted by the multinomial coefficient.
+$$
+P(a,b,c) = {a+b+c \choose a, b, c}
+$$
+\bigskip
+\\
+\subsection{Question 3}
+\emph{Prove the multinomial theorem for an arbitrary positive integer $m$.}
+\medskip
+We only need to prove the inductive case since it holds for monomials and binomials.
+\medskip
+\\
+Suppose it holds for $m$ for any $n$. Now, for $m+1$
+\end{document}
+\documentclass[11pt,letter]{article}

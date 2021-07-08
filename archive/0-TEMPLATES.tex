@@ -1,0 +1,55 @@
+\begin{table}
+\label{my-label}
+\begin{tabularx}{0.49\textwidth}{@{}l*{4}{C}c@{}}
+\toprule
+Domain (Representation) & Train & Valid & Test \\ 
+\midrule
+Restaurants (BBoW)      &  &  &  \\
+Restaurants (FBoW)      &  &  &  \\
+Restaurants (TFIDF)     &  &  &  \\
+Laptops (BBoW)          &  &  &  \\
+Laptops (FBoW)          &  &  &  \\
+Laptops (TFIDF)         &  &  &  \\
+\bottomrule
+\end{tabularx}
+\caption{Results for Random Forest using optimum hyperparameters}
+\end{table}
+
+\section{APPENDIX}
+
+\textbf{INSERT 6 FIGURES: distribution of sentences (1a) among aspects, (1b) among polarities, (1c) distribution of sentences w/ single aspect, w/ multiple aspects w/ the same polarity, w/ multiple aspects w/ differing polarities; EDIT FIGURE NUMBERING IN PARAGRAPHS}
+
+\begin{figure*}
+\centering
+\subfigure(a){
+\label{fig:A1a}
+\includegraphics[width=0.4\textwidth]{images/anal_asp_REST.png}}
+\hspace{8pt}
+\subfigure(b){
+\label{fig:A1b}
+\includegraphics[width=0.2\textwidth]{images/anal_pol_REST.png}} 
+\hspace{8pt}
+\subfigure(c){
+\label{fig:A1c}
+\includegraphics[width=0.2\textwidth]{images/anal_asp-pol_REST.png}} 
+\\
+\subfigure(d){
+\label{fig:A1e}
+\includegraphics[width=0.4\textwidth]{images/anal_asp_LAPT.png}}
+\hspace{8pt}
+\subfigure(e){
+\label{fig:A1e}
+\includegraphics[width=0.2\textwidth]{images/anal_pol_LAPT.png}}
+\hspace{8pt}
+\subfigure(f){
+\label{fig:A1f}
+\includegraphics[width=0.2\textwidth]{images/anal_asp-pol_LAPT.png}} 
+\caption{Dataset analysis: (REST)
+\subref{(a)} distribution for aspect;
+\subref{(b)} distribution for polarity;
+\subref{(c)} distribution for conflicting opinions; (LAPT)
+\subref{(d)} distribution for aspect;
+\subref{(e)} distribution for polarity;
+\subref{(f)} distribution for conflicting opinions}
+\label{fig:A1}
+\end{figure*}

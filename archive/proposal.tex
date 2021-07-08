@@ -1,0 +1,66 @@
+\documentclass[comsoc,conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Aspect-based Sentiment Analysis
+	\\ \large{Track 1, Paper T1-02 | Team Naive Baes}
+}
+
+\author{
+	\IEEEauthorblockN{Ijaz, Ramsha}
+	260665762 \\
+	\IEEEauthorblockA{ramsha.ijaz@mail.mcgill.ca}
+	\and
+	\IEEEauthorblockN{Rahman, Aanika}
+	260662187 \\
+	\IEEEauthorblockA{aanika.rahman@mail.mcgill.ca}
+	\and
+	\IEEEauthorblockN{Seol, Yunheum}
+	260677676 \\
+	\IEEEauthorblockA{yunheum.seol@mail.mcgill.ca}
+}
+
+\maketitle
+
+\section{Introduction} 
+\vspace{5px} \noindent 
+The chosen paper\footnote{\label{} https://arxiv.org/pdf/1609.02745.pdf} introduce a hierarchical bidirectional long short-term memory (H-LSTM) model to approach a sentimental analysis problem, exploiting both intra- and inter-sentence relations. Our goal is to implement standard classification models and compete against the baselines used in the chosen paper. 
+\\
+\\ The paper considers datasets of customer reviews in 5 domains and 8 languages, with a total of 11 domain-language datasets. Given the time frame, focus will be placed on the English dataset, which consists of two domains (i.e. restuarants, laptops). Each sentence is labeled with an aspect of one or more fields, and each aspect is given a binary value to describe sentiment.
+
+\section{Feature Design} 
+\vspace{5px} \noindent 
+Some preprocessing methods that will be implemented include removing stopwords and lemmatizing words (i.e. grouping together different inflections of the same word). High frequencies of stop words that have no value (e.g. "the") and having different inflections of the same word (e.g. "eating" and "eat") may distort what words are perceived valuable by a model.
+\\
+\\ Since the given text data must be transformed into a numerical representation, we will consider using n-grams based on words and/or characters, yielding two TD-IDF matrices. According to an experiment by Besbes\footnote{\label{} https://ahmedbesbes.com/overview-and-comparison-of-tranditional-and-deep-learning-models-in-text-classification.html}, the representations produced accuracy scores of 78-80\%. When two matrices are concatenated in order to build a new, hybrid TF-IDF matrix, a 2\% increase in accuracy can be observed. 
+
+\section{Algorithms}
+\vspace{5px} \noindent 
+The baselines against which H-LSTM have been tested are CNN and Bidirectional LSTM (Bi-LSTM), where LSTMs are a variant of RNNs. Comparing to CNNs, RNNs are better for sequential inputs like text, whereas LSTMs are even more preferable as they can consider long term dependencies between important events over indefinite length.\footnote{\label{} https://arxiv.org/pdf/1702.01923.pdf} 
+\\
+\\ As mentioned for LSTMs and assumed for CNNs, some hyperparameters tuned include batch size, patience, and drop out. The optimal parameter values to note include a mini-batch size of 10, a patience of 10, and a dropout of 0.5.
+\\
+\\ Along with the above baselines, classification algorithms, such as Naive Bayes, Linear SVM, and Logistic Regression, will be further explored to compete with the baseline performance. 
+\\
+\\ SVM has higher speed and better performance with a limited number of samples. This makes the algorithm very suitable for text classification problems, where often dataset has a limited size. SVM can learn regardless of the dimension of the feature space. Therefore, with an appropriate kernel function it can work well even if the data is not linearly separable in the base feature space.
+\\
+\\ Naive Bayes has linear training and testing time complexity when scanning the data. This is because we have to check all the data at least once. This results Naive Bayes to be time-wise optimal and hence be an efficient classifier for text analysis. 
+\\
+\\ Logistic Regression is a well known model that works well with sparse TF-IDF matrices, is easy to understand, and has many available variations such as beta-binomial model.
+
+\section{Hypothesis}
+\vspace{5px} \noindent 
+The classical models fail to model long-term dependencies between words in a sequence, which is a vulnerable aspect, since LSTM addresses such dependencies. Nevertheless, our team expects that with appropriate representation and hyperparameter tuning, the simple models can yield better results. In our opinion, one of the strong candidates to implement would be logistic regression. The hypothesis will be tested with the evaluation metric used in the paper i.e. cross-entropy loss. 
+\\
+\\ Overall, with standard classification models we will attempt to reflect the interdependencies between sentences in our sentiment analysis model.
+
+\end{document}

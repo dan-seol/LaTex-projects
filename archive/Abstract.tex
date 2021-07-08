@@ -1,0 +1,100 @@
+
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+
+\usepackage{float}
+
+\usepackage{blindtext} %for enumarations
+
+\usepackage[]{hyperref}  %link collor
+
+%talbe layout to the right
+%\usepackage[labelfont=bf]{caption}
+%\captionsetup[table]{labelsep=space,justification=raggedright,singlelinecheck=off}
+%\captionsetup[figure]{labelsep=quad}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+
+\setlength\parskip{4pt}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{McGill University} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge{Aspect Based Sentimental Analysis:} \\ % The assignment title
+Classical and Neural Network Approach\\
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Ramsha Ijaz, Aanika Rahman, Dan Seol} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+%\nocite{*}
+\maketitle % Print the title
+
+\newpage
+\begin{abstract}
+
+{\noindent{\Large Abstract} }\\
+\par Sentiment analysis has been the technique used to mine opinions from customer reviews. The classical approach to this was to treat an entire sentence as a document and extract sentiments ("positive", "neutral", and "negative") based on the all words. However, it has apparent limits for sentences that contain more than one aspect with conflicting sentiments. An example for this would be a review for a restaurant that says, "The food was tasty, but I don’t think it came at a reasonable price". The sentence contains two aspects (the one on quality of food and another on the price of the menu), and two contradicting sentiments. Aspect-based sentiment analysis (ABSA) addresses this issue by classifying sentiments for a given aspect label. In this approach, the previous example would have two different sentiments for both aspects would be correctly reflected.
+
+\par ABSA has its own issue that it analyzes each sentence in a review independently, not taking into account the argumentative structure of the review. In our research we explore simple classical algorithms such as the SVM and explore its accuracy within the English dataset provided by SemEval 2016. We have also implemented neural network models, i.e. LSTM and GRU. Both of the models are compared and analyzed in terms of their accuracy measure.
+We will compare the performance of our model with the work "A Hierarchical Model of Reviews for Aspect Based Sentiment Analysis" \cite{T1-P2}. The paper considers datasets of customer reviews in 5 domains and 8 languages, with a total of 11 domain-language datasets. Given the time frame and our objective, focus will be placed on only the English datasets, which consist of two domains, restuarants (REST) and laptops (LAPT). \\
+
+\end{abstract}
+\textbf{Key words:} Natural Language Processing, Machine Learning, Sentimental Analysis, Aspect-based Sentimental Analysis, Data Mining 
+\newpage
+%bibliography
+\section*{Appendix}
+\bibliographystyle{plain}
+\bibliography{report}
+
+\end{document}
+
+
+
